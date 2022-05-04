@@ -1,0 +1,106 @@
+<%- 
+include('partials/_header');
+%>
+
+
+
+<div class="breadcrumb-bar">
+<div class="container">
+<div class="row align-items-center inner-banner">
+<div class="col-md-12 col-12 text-center">
+<h2 class="breadcrumb-title">Proje Yayınla</h2>
+<nav aria-label="breadcrumb" class="page-breadcrumb">
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="/">Anasayfa</a></li>
+<li class="breadcrumb-item active" aria-current="page"> Proje Yayınla</li>
+</ol>
+</nav>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="content">
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<div class="select-project mb-4">
+
+<form action="/jobs" method="POST">
+<div class="title-box widget-box">
+
+<div class="title-content">
+<div class="title-detail">
+<h3>Proje Adı</h3>
+<div class="form-group mb-0">
+<input name="name" type="text" class="form-control" placeholder="Proje başlığı giriniz...">
+<input name="role" type="hidden" class="form-control" value="<%= user.role %>">
+</div>
+</div>
+</div>
+
+<div class="title-content">
+    <div class="title-detail">
+    <h3>Proje Sahibi</h3>
+    <div class="form-group mb-0">
+    <input name="isveren" type="text" class="form-control" placeholder="İşveren ismini giriniz...">
+    </div>
+    </div>
+    </div>
+
+
+
+<div class="title-content">
+<div class="title-detail">
+<h3>Proje Kategorisi</h3>
+<div class="form-group mb-0">
+<select name="category" class="form-control select">
+    <option invalid >Proje Kategorisi Seç</option>
+    <% for(let i=0; i< categories.length; i++){ %>
+        <option value="<%= categories[i]._id %>"> <%= categories[i].name %> </option>
+        <% } %>
+</select>
+</div>
+</div>
+</div>
+
+<div class="title-content">
+    <div class="title-detail">
+    <h3>Fiyat Teklifi</h3>
+    <div class="form-group mb-0">
+    <input name="fiyat" type="number" class="form-control" placeholder="Fiyat teklifinizi giriniz...">
+    </div>
+    </div>
+    </div>
+
+
+<div class="title-content pb-0">
+<div class="title-detail">
+<h3>Proje Açıklaması </h3>
+<div class="form-group mb-0">
+<textarea name="description" class="form-control summernote" rows="5"></textarea>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-12 text-end">
+<div class="btn-item">
+<button type="submit" class="btn next-btn">Gönder</button>
+</div>
+</div>
+</div>
+</div>
+
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<%- 
+include('partials/_footer')
+%>

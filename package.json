@@ -1,0 +1,35 @@
+{
+  "name": "freelancer-projesi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "msg": "node chat.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@authpack/sdk": "^0.8.18",
+    "bcrypt": "^5.0.1",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^4.6.0",
+    "ejs": "^3.1.7",
+    "express": "^4.18.1",
+    "express-fileupload": "^1.3.1",
+    "express-session": "^1.17.2",
+    "express-validator": "^6.14.0",
+    "method-override": "^3.0.0",
+    "mongodb": "^4.5.0",
+    "mongoose": "^6.3.1",
+    "mongose": "^0.0.2-security",
+    "req": "^0.1.4",
+    "request-body": "^1.2.5",
+    "slugify": "^1.6.5",
+    "socket.io": "^4.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "prettier": "2.6.2"
+  }
+}

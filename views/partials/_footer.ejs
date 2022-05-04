@@ -1,0 +1,128 @@
+
+<footer class="footer">
+    <div class="footer-top aos" data-aos="fade-up">
+    <div class="container">
+    <div class="row">
+    <div class="col-md-3">
+    <h2 class="footer-title">Ofis Adreslerimiz</h2>
+    <div class="footer-address">
+    <div class="off-address">
+    <p class="mb-2">Muğla Ofisi</p>
+    <address class="mb-0">Çıtlık Mahallesi Köyiçi Sokak Ula/Muğla</address>
+    <p>Ara: <a href="#"><u>+90 553 408 34 50</u> (Geliştirici İletişim)</a> </p>
+    </div>
+    <div class="off-address">
+    <p class="mb-2">Ankara Ofisi </p>
+    <address class="mb-0">buraya adresi giricem</address>
+    <p>Ara: <a href="#"><u>(08) 9064 9807</u> (Yönetim-Destek İletişim)</a> </p>
+    </div>
+    </div>
+    </div>
+    <div class="col-lg-2">
+    <div class="footer-widget footer-menu">
+    <h2 class="footer-title">Linkler</h2>
+    <ul>
+    <li><a href="/about">Hakkımızda</a></li>
+    <li><a href="/blogs/">Blog</a></li>
+    <% if(!userIN) { %>
+    <li><a href="/login">Giriş Yap</a></li>
+    <li><a href="/register">Kayıt Ol</a></li>
+    <li><a href="forgot-password.html">Şifremi Unuttum</a></li>
+    <% } %>
+    <% if(userIN) { %>
+        <li><a href="/users/logout">Çıkış Yap</a></li>
+        <% } %>
+    </ul>
+    </div>
+    </div>
+    <div class="col-lg-2">
+    <div class="footer-widget footer-menu">
+    <h2 class="footer-title">Yardım & Destek</h2>
+    <ul>
+    <li><a href="faq.html">Sık Sorulanlar</a></li>
+    <li><a href="privacy-policy.html">Gizlilik Politikası</a></li>
+    <li><a href="term-condition.html">Kullanıcı Sözleşmesi</a></li>
+    </ul>
+    </div>
+    </div>
+    <div class="col-lg-2">
+    <div class="footer-widget footer-menu">
+    <h2 class="footer-title">Yararlı Linkler</h2>
+    <ul>
+        <% if(!userIN) { %>
+            <li><a href="/about">ProJob Hakkında</a></li>
+            <% } %>
+
+        <% if(userIN) { %>
+    <li><a href="/freelancers">Freelancer Bul</a></li>
+    <li><a href="/jobs">Proje Bul</a></li>
+    <% } %>
+
+    </ul>
+    </div>
+    </div>
+    <div class="col-lg-3">
+    <div class="footer-widget footer-menu">
+    <h2 class="footer-title">Mobil Uygulama</h2>
+    <p>Mobil uygulamamızı bugün indirin kullanım kolaylığıyla işlerinizi cebten yürütün.</p>
+    <div class="row g-2">
+    <div class="col">
+    <a href="#"><img class="img-fluid" src="/assets/img/app-store.svg" alt="app-store"></a>
+    </div>
+    <div class="col">
+    <a href="#"><img class="img-fluid" src="/assets/img/google-play.svg" alt="google-play"></a>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    
+    <div class="footer-bottom">
+    <div class="container">
+    
+    <div class="copyright">
+    <div class="row">
+    <div class="col-md-6 col-lg-6">
+    <div class="copyright-text">
+    <p class="mb-0">&copy; 2022 - Tüm Hakları Saklıdır - ProJob </p>
+    </div>
+    </div>
+    <div class="col-md-6 col-lg-6 right-text">
+    <div class="social-icon">
+    <ul>
+    <li><a href="#" class="icon" target="_blank"><i class="fab fa-instagram"></i> </a></li>
+    <li><a href="#" class="icon" target="_blank"><i class="fab fa-linkedin-in"></i> </a></li>
+    <li><a href="#" class="icon" target="_blank"><i class="fab fa-twitter"></i> </a></li>
+    </ul>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    </div>
+    </div>
+    
+    </footer>
+    
+    </div>
+    
+    
+    <script src="/assets/js/jquery-3.6.0.min.js"></script>
+    
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="/assets/js/owl.carousel.min.js"></script>
+    
+    <script src="/assets/plugins/aos/aos.js"></script>
+    
+    <script src="/assets/plugins/select2/js/select2.min.js"></script>
+    
+    <script src="/assets/js/slick.js"></script>
+    
+    <script src="/assets/js/script.js"></script>
+    </body>
+    
+    </html>

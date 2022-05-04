@@ -1,0 +1,67 @@
+<%- 
+include('partials/_header');
+%>
+<br><br>
+
+<div class="content">
+<div class="container">
+<div class="row">
+<div class="col-md-6 offset-md-3">
+
+<div class="account-content">
+<div class="align-items-center justify-content-center">
+<div class="login-right">
+<div class="login-header text-center">
+<a href="index.html"><img src="assets/img/logo-01.png" alt="logo" class="img-fluid"></a>
+<h3>Hoşgeldiniz</h3>
+<p>Oturum açın profesyonel proje alışverişine devam edin...</p>
+</div>
+
+<% if (flashMessages) { %>
+    <% if (flashMessages.success) { %>
+      <div class="alert alert-success">
+    <%= flashMessages.success %>
+    </div>
+  <% } else if (flashMessages.error) { %>
+   <div class="alert alert-danger">
+    <%= flashMessages.error %>
+    </div>
+    <% } %>
+  <% } %>    
+
+<form action="users/login" method="post">
+<div class="form-group form-focus">
+<input name="email" type="text" class="form-control floating">
+<label class="focus-label">Email</label>
+</div>
+<div class="form-group form-focus">
+<input name="password" type="password" class="form-control floating">
+<label class="focus-label">Şifre</label>
+</div>
+<div class="form-group">
+<label class="custom_check">
+<input type="checkbox" name="rem_password">
+</label>
+</div>
+<button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Giriş Yap</button>
+
+<div class="row">
+<div class="col-6 text-start">
+<a class="forgot-link" href="forgot-password.html">Şifremi Unuttum</a>
+</div>
+<div class="col-6 text-end dont-have">Yeni misiniz? <a href="/register">Kaydolun</a></div>
+</div>
+</form>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+
+<%- 
+include('partials/_footer')
+%>

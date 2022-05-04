@@ -1,0 +1,91 @@
+<%- 
+include('partials/_header');
+%>
+
+
+<div class="breadcrumb-bar" >
+<div class="container">
+<div class="row align-items-center inner-banner">
+<div class="col-md-12 col-12 text-center">
+<h2 class="breadcrumb-title">Proje İlanını Güncelle</h2>
+<nav aria-label="breadcrumb" class="page-breadcrumb">
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="/">Anasayfa</a></li>
+<li class="breadcrumb-item active" aria-current="page"> Projeyi Güncelle</li>
+</ol>
+</nav>
+</div>
+</div>
+</div>
+</div>
+
+<% for (let i=0; i< jobs.length; i++) { %>
+<div class="content" id="<%= jobs[i]._id %>">
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<div class="select-project mb-4">
+
+<form action="/jobs/<%= jobs[i].slug %>?_method=PUT" method="POST">
+<div class="title-box widget-box">
+
+<div class="title-content">
+<div class="title-detail">
+<h3>Proje Adı</h3>
+<div class="form-group mb-0">
+<input name="name" type="text" class="form-control" value="<%= jobs[i].name %>" placeholder="Proje başlığı giriniz...">
+</div>
+</div>
+</div>
+
+<div class="title-content">
+    <div class="title-detail">
+    <h3>Proje Sahibi</h3>
+    <div class="form-group mb-0">
+    <input name="isveren" type="text" class="form-control" value="<%= jobs[i].isveren %>" placeholder="İşveren ismini giriniz...">
+    </div>
+    </div>
+    </div>
+
+
+<div class="title-content">
+    <div class="title-detail">
+    <h3>Fiyat Teklifi</h3>
+    <div class="form-group mb-0">
+    <input value="<%= jobs[i].fiyat %>" name="fiyat" type="number" class="form-control" placeholder="Fiyat teklifinizi giriniz...">
+    </div>
+    </div>
+    </div>
+
+
+<div class="title-content pb-0">
+<div class="title-detail">
+<h3>Proje Açıklaması </h3>
+<div class="form-group mb-0">
+<textarea  name="description" class="form-control summernote" value="" rows="15"><%= jobs[i].description %></textarea>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-12 text-end">
+<div class="btn-item">
+<button type="submit" class="btn next-btn">Gönder</button>
+</div>
+</div>
+</div>
+</div>
+
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+<% } %>
+
+
+<%- 
+include('partials/_footer')
+%>
+

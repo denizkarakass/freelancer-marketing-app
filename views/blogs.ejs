@@ -1,0 +1,87 @@
+<%- 
+include('partials/_header');
+%>
+
+
+<div class="breadcrumb-bar">
+<div class="container">
+<div class="row align-items-center inner-banner">
+<div class="col-md-12 col-12 text-center">
+<h2 class="breadcrumb-title">ProJob Blog </h2>
+<nav aria-label="breadcrumb" class="page-breadcrumb">
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="/">Anasayfa</a></li>
+<li class="breadcrumb-item active" aria-current="page"><a href="/blogs">Blog</a></li>
+</ol>
+</nav>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="content">
+<div class="container">
+<div class="row">
+<div class="col-lg-8 col-md-12">
+<div class="row blog-grid-row">
+
+    <!--BLOG YAZILARI BURADA-->
+    <% for (let i=0; i< blogs.length; i++) { %>
+<div class="col-md-6 col-sm-12">
+
+<div class="blog grid-blog">
+<div class="blog-image">
+<a href="/blogs/<%= blogs[i].slug %>"><img class="img-fluid" src="/assets/img/blog/blog-01.jpg" alt="Post Image"></a>
+</div>
+<div class="blog-content">
+<ul class="entry-meta meta-item">
+<li>
+<div class="post-author">
+<a href="/blogs/<%= blogs[i].slug %>"><img src="/assets/img/img-02.jpg" alt="Post Author"> <span> David Lee</span></a>
+</div>
+</li>
+<li><i class="far fa-clock"></i> 4 Apr 2021</li>
+</ul>
+<h3 class="blog-title"><a href="/blogs/<%= blogs[i].slug %>">Your next job starts right here</a></h3>
+<p class="mb-0">Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do eiusmod tempor.</p>
+</div>
+</div>
+
+</div>
+<% } %>
+
+</div>
+
+
+</div>
+
+<div class="col-lg-4 col-md-12 sidebar-right ">
+
+
+
+<!--Kategoriler-->
+<div class=" pro-post widget-box category-widget">
+<h4 class="pro-title">Blog Kategorileri</h4>
+<div class="pro-content">
+<ul class="category-link">
+    <li><a href="/blogs">Tüm Yazılar</a></li>
+    <% for(let i=0; i< categories.length; i++){ %>
+<li><a href="/blogs?categories=<%= categories[i].slug %>"><%= categories[i].name %></a></li>
+<% } %>
+
+</ul>
+</div>
+</div>
+
+
+
+</div>
+
+</div>
+</div>
+</div>
+
+<%- 
+include('partials/_footer')
+%>

@@ -1,0 +1,115 @@
+<%- 
+include('partials/_header');
+%>
+
+
+<div class="breadcrumb-bar">
+<div class="container">
+<div class="row">
+<div class="col-md-12 text-end">
+<div class="inner-content">
+    <!-- ÜST İÇERİK GİRİLEBİLİR-->
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="content">
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+
+<div class="profile">
+<div class="profile-box">
+<div class="provider-widget">
+<div class="pro-info-left">
+<div class="provider-img">
+<img src="/assets/img/img-04.jpg" alt="User">
+<div class="camera-bg"><i class="fa fa-camera"></i></div>
+</div>
+<div class="profile-info profile-edit-form">
+<h2 class="profile-title"><%= freelancer.name %></h2>
+<div class="pro-text3">
+<p class="profile-position"><%= freelancer.free_alan %></p>
+<ul class="profile-preword">
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="row">
+<div class="col-lg-8 col-md-12">
+<div class="pro-view">
+
+<div class="tab-content pt-0">
+
+<div role="tabpanel" id="overview" class="tab-pane fade show active">
+<div class="pro-post widget-box">
+<div class="row">
+<div class="col-10">
+<h3 class="pro-title">Freelancer Hakkında</h3>
+</div>
+<div class="col-2 text-end">
+<a href="javascript:void(0);" id="edit_overview" class="sub-title edit-sub-title"><i class="fa fa-pencil-alt me-1"></i></a>
+</div>
+</div>
+<div class="pro-overview">
+<div class="pro-content">
+<div class="pro-text1">
+    <p><%= freelancer.free_description %> </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-lg-4 col-md-12 sidebar-right theiaStickySidebar">
+
+
+<div class="pro-post widget-box about-widget">
+<div class="row">
+<div class="col-10">
+<h4 class="pro-title mb-0">Ben kimim ?</h4>
+</div>
+</div>
+<ul class="latest-posts pro-content pt-0">
+<li><p>İsimim:</p><h6><%= freelancer.free_alan %></h6></li>
+<li><p>Saatlik Ortala Çalışma Fiyatı:</p><h6><%= freelancer.free_fiyat %> Tl/saat</h6></li>
+</ul>
+</div>
+
+
+<div class="pro-post widget-box about-widget">
+    <div class="row">
+    <div class="col-10">
+    <h4 class="pro-title mb-0">Neden Ben ?</h4>
+    </div>
+    </div>
+    <ul class="latest-posts pro-content pt-0">
+    <li><p></p><h6><%= freelancer.neden %></h6></li>
+    </ul>
+    </div>
+
+
+
+</div>
+
+</div>
+</div>
+</div>
+
+
+<%- 
+include('partials/_footer')
+%>

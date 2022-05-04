@@ -1,0 +1,79 @@
+<%- 
+include('partials/_header');
+%>
+<br><br>
+
+
+<div class="content">
+<div class="container-fluid">
+<div class="row">
+<div class="col-xl-9 col-md-8 mx-auto">
+<div class="my-projects">
+<div class="row">
+<div class="col-lg-9 d-flex">
+<div class="pro-post w-100">
+<div class="card-body">
+<div class="projects-list">
+<h2><%= job.name %></h2>
+<ul class="prolist-details">
+<li>
+<div class="list-slot">
+<h5>Fiyat Teklifi</h5>
+<p class="price"><%= job.fiyat %></p>
+</div>
+</li>
+<li>
+<div class="list-slot">
+<h5>Proje Sahibi</h5>
+<p> <%= job.isveren %></p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="col-lg-3 mb-3 d-flex flex-wrap">
+<div class="pro-post mb-3 w-100">
+<div class="card-body">
+<div class="hire-box text-center">
+<% if ( user && !(user.jobs.includes(job._id))) { %>
+<form action="/jobs/enroll" method="POST"> 
+    <input type="hidden" name="job_id" value="<%= job._id %>">
+<button class="btn projects-btn">Projeye Başvur</button> <br> <br>
+</form>
+<% } %>
+
+<% if ( user && user.jobs.includes(job._id)) { %>            
+    <form action="/jobs/release" method="POST"> 
+        <input type="hidden" name="job_id" value="<%= job._id %>">
+    <button class="btn projects-btn">Başvuruyu Çek</button> <br> <br>
+    </form>
+    <% } %>
+
+<a href="" class="btn projects-btn">Proje Sahibine Mesaj Gönder</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="pro-post widget-box">
+<h3 class="pro-title">Proje Açıklaması</h3>
+<div class="pro-overview">
+<p><%= job.description %></p>
+</div>
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+
+
+<%- 
+include('partials/_footer')
+%>

@@ -1,0 +1,895 @@
+<%- include('partials/_header'); %>
+
+    <% if(user) { %>
+        <br><br><br>
+
+        <!--FREELANCER YÖNETİM PANELİ START-->
+        <% if(user.role==='freelancer' ) { %>
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <div class="col-xl-3 col-md-4 ">
+                            <div class="settings-widget">
+                                <div
+                                    class="settings-header d-sm-flex flex-row flex-wrap text-center text-sm-start align-items-center">
+                                    <a href="freelancer-profile.html"><img alt="profile image"
+                                            src="/assets/img/img-04.jpg" class="avatar-lg rounded-circle"></a>
+                                    <div class="ms-sm-3 ms-md-0 ms-lg-3 mt-2 mt-sm-0 mt-md-2 mt-lg-0">
+                                        <p class="mb-2">Hosşgeldin,</p>
+                                        <h3 class="mb-0"><a href="freelancer-profile.html">
+                                                <%= user.name %>
+                                            </a></h3>
+                                    </div>
+                                </div>
+                                <div class="settings-menu">
+                                    <ul>
+                                        <li class="nav-item">
+                                            <a href="freelancer-dashboard.html" class="nav-link active">
+                                                <i class="material-icons">verified_user</i> Yönetim Paneli
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/jobs" class="nav-link">
+                                                <i class="material-icons">business_center</i> Proje Bul
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/message" class="nav-link">
+                                                <i class="material-icons">chat</i> Mesajlaşma
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="freelancer-withdraw-money.html" class="nav-link">
+                                                <i class="material-icons">wifi_tethering</i> Cüzdanım
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/users/logout" class="nav-link">
+                                                <i class="material-icons">power_settings_new</i> Çıkış Yap
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!--Freelancer Ekle-->
+                                <div class="pro-head"><a href="/addFree" class="btn fund-btn skill-add">
+                                        İlan Oluştur Ve Yayınla
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-xl-9 col-md-8">
+                            <div class="dashboard-sec">
+
+
+                                <div class="row">
+                                    <div class="col-xl-8 d-flex">
+                                        <div class="card flex-fill">
+                                            <div class="pro-head">
+                                                <h5 class="card-title mb-0">Freelancer Profil Detayları</h5>
+                                            </div>
+                                            <div class="pro-body">
+                                                <div id="chartprofile"></div>
+                                                <p>Ad-Soyad: <%= user.name %>
+                                                </p>
+                                                <p>Email Adresi: <%= user.email %>
+                                                </p>
+                                                <p>Uzmanlık Alanı:</p>
+                                                <p>Saatlik Ortalama Fiyatı:</p>
+                                                <p>Freelancer Açıklaması: <%= user.freelancer_description %>
+                                                </p>
+                                            </div>
+                                            <center>
+                                                <h4>Başvurduğum Projeler</h4>
+                                            </center>
+
+                                            <% for (let i=0; i< user.jobs.length; i++) { %>
+                                                <div class="freelancer-proposals">
+                                                    <div class="project-proposals align-items-center freelancer">
+                                                        <div class="proposals-info">
+                                                            <div class="proposals-detail">
+                                                                <h2 class="proposals-title">
+                                                                    <%= user.jobs[i].name %>
+                                                                </h2>
+                                                                <div class="proposals-content">
+                                                                    <div class="proposal-img">
+                                                                        <div class="text-md-center">
+                                                                            <h4>
+                                                                                <%= user.jobs[i].isveren %>
+                                                                            </h4>
+                                                                            <span class="info-btn">İş Veren</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="proposal-client">
+                                                                        <h4 class="title-info">Fiyat Teklifi</h4>
+                                                                        <h2 class="client-price">
+                                                                            <%= user.jobs[i].fiyat %> Tl
+                                                                        </h2>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="project-hire-info">
+                                                                <div class="content-divider-1"></div>
+                                                                <div class="projects-amount">
+                                                                    <h4>Proje Sahibi: <%= user.jobs[i].isveren %>
+                                                                    </h4>
+                                                                </div>
+                                                                <div class="content-divider-1"> </div>
+
+                                                            </div>
+
+                                                            <form action="/jobs/release" method="POST">
+                                                                <input type="hidden" name="job_id"
+                                                                    value="<%= user.jobs[i]._id %>">
+                                                                <button class="btn projects-btn">Başvuruyu Çek</button>
+                                                                <br> <br>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <% } %>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-4 d-flex">
+                                        <div class="flex-fill card">
+                                            <div class="pro-head b-0">
+                                                <h5 class="card-title mb-0">Hesap Ayarları</h5>
+                                            </div>
+                                            <div class="pro-body">
+                                                <div id="chartradial"></div>
+                                                <ul class="static-list">
+
+                                                    <!-- Button trigger modal -->
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                        data-target="#exampleModalCenter">
+                                                        Launch demo modal
+                                                    </button>
+                                                    <!-- User Update Modal -->
+                                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1"
+                                                        role="dialog" aria-labelledby="exampleModalCenterTitle"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="col-xl-12 d-flex">
+                                                                    <div class="flex-fill card">
+                                                                        <div class="pro-head b-0">
+                                                                            <h5 class="card-title mb-0">Hesap Ayarları</h5>
+                                                                        </div>
+                                                                        <div class="pro-body">
+                                                                            <div id="chartradial"></div>
+                                                                            <ul class="static-list">
+                                                                                <form action="" method="post">
+                                                                                    <div class="form-group form-focus">
+                                                                                        <input name="name" type="text"
+                                                                                            class="form-control floating">
+                                                                                        <label class="focus-label">Ad Soyad</label>
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label class="focus-label">İşveren
+                                                                                            Açıklaması</label>
+                                                                                        <textarea name="free_description" type="text"
+                                                                                            rows="15"
+                                                                                            class="form-control floating"> </textarea>
+                                                                                    </div>
+                                                                                 
+                
+                                                                            </ul>
+                                                                        </div>
+                
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button
+                                                                    class="btn btn-primary btn-block btn-lg login-btn"
+                                                                    type="submit">İşveren Bilgilerini
+                                                                    Kaydet</button>
+                                                            </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+                    <!--FREELANCER YÖNETİM PANELİ FİNİSH-->
+
+
+
+
+                    <!--İş Veren YÖNETİM PANELİ START-->
+                    <% if(user.role==='isveren' ) { %>
+                        <div class="content">
+                            <div class="container-fluid">
+                                <div class="row">
+
+                                    <div class="col-xl-3 col-md-4 ">
+                                        <div class="settings-widget">
+                                            <div
+                                                class="settings-header d-sm-flex flex-row flex-wrap text-center text-sm-start align-items-center">
+                                                <a href="freelancer-profile.html"><img alt="profile image"
+                                                        src="/assets/img/img-04.jpg"
+                                                        class="avatar-lg rounded-circle"></a>
+                                                <div class="ms-sm-3 ms-md-0 ms-lg-3 mt-2 mt-sm-0 mt-md-2 mt-lg-0">
+                                                    <p class="mb-2">Hosşgeldin,</p>
+                                                    <h3 class="mb-0"><a href="freelancer-profile.html">
+                                                            <%= user.name %>
+                                                        </a></h3>
+                                                </div>
+                                            </div>
+                                            <div class="settings-menu">
+                                                <ul>
+                                                    <li class="nav-item">
+                                                        <a href="freelancer-dashboard.html" class="nav-link active">
+                                                            <i class="material-icons">verified_user</i> Yönetim Paneli
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a href="/freelancers" class="nav-link">
+                                                            <i class="material-icons">business_center</i> Freelancer Bul
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a href="/message" class="nav-link">
+                                                            <i class="material-icons">chat</i> Mesajlaşma
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a href="freelancer-withdraw-money.html" class="nav-link">
+                                                            <i class="material-icons">wifi_tethering</i> Ödeme
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a href="/users/logout" class="nav-link">
+                                                            <i class="material-icons">power_settings_new</i> Çıkış Yap
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                                <!--Proje Ekle-->
+                                                <div class="pro-head"><a href="/addProje"
+                                                        class="btn fund-btn skill-add">
+                                                        Yeni Proje Ekle
+                                                    </a>
+                                                </div>
+
+                                                <div class="pro-head"><a href="/addFree" class="btn fund-btn skill-add">
+                                                        Freelance Çalışma İlanı Oluştur Ve Yayınla
+                                                    </a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-xl-9 col-md-8">
+                                        <div class="dashboard-sec">
+
+
+                                            <div class="row">
+                                                <div class="col-xl-8 d-flex">
+                                                    <div class="card flex-fill">
+                                                        <div class="pro-head">
+                                                            <h5 class="card-title mb-0">İşveren Profil Detayları</h5>
+                                                        </div>
+                                                        <div class="pro-body">
+                                                            <div id="chartprofile"></div>
+                                                            <p>Ad-Soyad: <%= user.name %>
+                                                            </p>
+                                                            <p>Email Adresi: <%= user.email %>
+                                                            </p>
+                                                            <p>İşveren Açıklaması:</p>
+                                                            <hr>
+                                                            <!--Proje Ekle-->
+                                                            <div class="pro-head"><a href="/addProje"
+                                                                    class="btn fund-btn skill-add">
+                                                                    Yeni Proje Ekle
+                                                                </a>
+                                                            </div>
+                                                            <center>
+                                                                <h3 class="card-title mb-0">Yayınladığım Projeler</h3>
+                                                                <br>
+                                                            </center>
+
+
+                                                            <% if (flashMessages) { %>
+                                                                <% if (flashMessages.success) { %>
+                                                                    <div class="alert alert-success">
+                                                                        <%= flashMessages.success %>
+                                                                    </div>
+                                                                    <% } else if (flashMessages.error) { %>
+                                                                        <div class="alert alert-danger">
+                                                                            <%= flashMessages.error %>
+                                                                        </div>
+                                                                        <% } %>
+                                                                            <% } %>
+
+
+                                                                                <% for (let i=0; i< jobs.length; i++) {
+                                                                                    %>
+                                                                                    <div class="freelancer-proposals">
+                                                                                        <div
+                                                                                            class="project-proposals align-items-center freelancer">
+                                                                                            <div class="proposals-info">
+                                                                                                <div
+                                                                                                    class="proposals-detail">
+                                                                                                    <h2
+                                                                                                        class="proposals-title">
+                                                                                                        <%= jobs[i].name
+                                                                                                            %>
+                                                                                                    </h2>
+                                                                                                    <div
+                                                                                                        class="proposals-content">
+                                                                                                        <div
+                                                                                                            class="proposal-img">
+                                                                                                            <div
+                                                                                                                class="text-md-center">
+                                                                                                                <h4>
+                                                                                                                    <%= jobs[i].isveren
+                                                                                                                        %>
+                                                                                                                </h4>
+                                                                                                                <span
+                                                                                                                    class="info-btn">İş
+                                                                                                                    Veren</span>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="proposal-client">
+                                                                                                            <h4
+                                                                                                                class="title-info">
+                                                                                                                Fiyat
+                                                                                                                Teklifi
+                                                                                                            </h4>
+                                                                                                            <h2
+                                                                                                                class="client-price">
+                                                                                                                <%= jobs[i].fiyat
+                                                                                                                    %>
+                                                                                                                    Tl
+                                                                                                            </h2>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div
+                                                                                                    class="project-hire-info">
+                                                                                                    <div
+                                                                                                        class="content-divider-1">
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                        class="projects-amount">
+                                                                                                        <h4>Proje
+                                                                                                            Sahibi: <%=
+                                                                                                                jobs[i].isveren
+                                                                                                                %>
+                                                                                                        </h4>
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                        class="content-divider-1">
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                        class="projects-action text-center">
+                                                                                                        <a class="projects-btn"
+                                                                                                            href="/updateProje/#<%= jobs[i]._id %>">
+                                                                                                            İlanı
+                                                                                                            Güncelle
+                                                                                                        </a>
+                                                                                                        <a href="/jobs/<%= jobs[i].slug %>?_method=DELETE"
+                                                                                                            onclick="return confirm('Projeyi kaldırmak istediğinizden emin misiniz')"
+                                                                                                            class="projects-btn">İlanı
+                                                                                                            Kaldır</a>
+
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="description-proposal">
+                                                                                                <h5 class="desc-title">
+                                                                                                    Açıklama</h5>
+                                                                                                <p>
+                                                                                                    <%= jobs[i].description.substring(0,100)
+                                                                                                        + "..." %>
+                                                                                                </p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <% } %>
+
+                                                                                        <hr>
+                                                                                        <hr>
+                                                                                        <center>
+                                                                                            <h4>Başvurduğum Projeler
+                                                                                            </h4>
+                                                                                        </center>
+
+                                                                                        <% for (let i=0; i<
+                                                                                            user.jobs.length; i++) { %>
+                                                                                            <div
+                                                                                                class="freelancer-proposals">
+                                                                                                <div
+                                                                                                    class="project-proposals align-items-center freelancer">
+                                                                                                    <div
+                                                                                                        class="proposals-info">
+                                                                                                        <div
+                                                                                                            class="proposals-detail">
+                                                                                                            <h2
+                                                                                                                class="proposals-title">
+                                                                                                                <%= user.jobs[i].name
+                                                                                                                    %>
+                                                                                                            </h2>
+                                                                                                            <div
+                                                                                                                class="proposals-content">
+                                                                                                                <div
+                                                                                                                    class="proposal-img">
+                                                                                                                    <div
+                                                                                                                        class="text-md-center">
+                                                                                                                        <h4>
+                                                                                                                            <%= user.jobs[i].isveren
+                                                                                                                                %>
+                                                                                                                        </h4>
+                                                                                                                        <span
+                                                                                                                            class="info-btn">İş
+                                                                                                                            Veren</span>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                                <div
+                                                                                                                    class="proposal-client">
+                                                                                                                    <h4
+                                                                                                                        class="title-info">
+                                                                                                                        Fiyat
+                                                                                                                        Teklifi
+                                                                                                                    </h4>
+                                                                                                                    <h2
+                                                                                                                        class="client-price">
+                                                                                                                        <%= user.jobs[i].fiyat
+                                                                                                                            %>
+                                                                                                                            Tl
+                                                                                                                    </h2>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="project-hire-info">
+                                                                                                            <div
+                                                                                                                class="content-divider-1">
+                                                                                                            </div>
+                                                                                                            <div
+                                                                                                                class="projects-amount">
+                                                                                                                <h4>Proje
+                                                                                                                    Sahibi:
+                                                                                                                    <%= user.jobs[i].isveren
+                                                                                                                        %>
+                                                                                                                </h4>
+                                                                                                            </div>
+                                                                                                            <div
+                                                                                                                class="content-divider-1">
+                                                                                                            </div>
+
+                                                                                                        </div>
+
+                                                                                                        <form
+                                                                                                            action="/jobs/release"
+                                                                                                            method="POST">
+                                                                                                            <input
+                                                                                                                type="hidden"
+                                                                                                                name="job_id"
+                                                                                                                value="<%= user.jobs[i]._id %>">
+                                                                                                            <button
+                                                                                                                class="btn projects-btn">Başvuruyu
+                                                                                                                Çek</button>
+                                                                                                            <br> <br>
+                                                                                                        </form>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                            <% } %>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-xl-4 d-flex">
+                                                    <div class="flex-fill card">
+                                                        <div class="pro-head b-0">
+                                                            <h5 class="card-title mb-0">Hesap Ayarları</h5>
+                                                        </div>
+                                                        <div class="pro-body">
+                                                            <div id="chartradial"></div>
+                                                            <ul class="static-list">
+                                                                  <!-- Button trigger modal -->
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#exampleModalCenter">
+                                                    Hesap bilgilerini güncelle.
+                                                </button>
+                                                <!-- User Update Modal -->
+                                                <div class="modal fade" id="exampleModalCenter" tabindex="-1"
+                                                    role="dialog" aria-labelledby="exampleModalCenterTitle"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="col-xl-12 d-flex">
+                                                                <div class="flex-fill card">
+                                                                    <div class="pro-head b-0">
+                                                                        <h5 class="card-title mb-0">Hesap Ayarları</h5>
+                                                                    </div>
+                                                                    <div class="pro-body">
+                                                                        <div id="chartradial"></div>
+                                                                        <ul class="static-list">
+                                                                            <form action="" method="post">
+                                                                                <div class="form-group form-focus">
+                                                                                    <input name="name" type="text"
+                                                                                        class="form-control floating">
+                                                                                    <label class="focus-label">Ad Soyad</label>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label class="focus-label">İşveren
+                                                                                        Açıklaması</label>
+                                                                                    <textarea name="free_description" type="text"
+                                                                                        rows="15"
+                                                                                        class="form-control floating"> </textarea>
+                                                                                </div>
+
+                                                            </ul>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+
+
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <% } %>
+
+                            <!--İş Veren YÖNETİM PANELİ FİNİSH-->
+
+
+
+
+
+                            <!--Site YÖNETİM PANELİ START-->
+                            <% if(user.role==='admin' ) { %>
+
+                                <div class="content">
+                                    <div class="container-fluid">
+                                        <div class="row">
+
+                                            <div class="col-xl-2 col-md-4 ">
+                                                <div class="settings-widget">
+                                                    <div
+                                                        class="settings-header d-sm-flex flex-row flex-wrap text-center text-sm-start align-items-center">
+                                                        <a href="freelancer-profile.html"><img alt="profile image"
+                                                                src="/assets/img/img-04.jpg"
+                                                                class="avatar-lg rounded-circle"></a>
+                                                        <div
+                                                            class="ms-sm-3 ms-md-0 ms-lg-3 mt-2 mt-sm-0 mt-md-2 mt-lg-0">
+                                                            <p class="mb-2">Yönetici:</p>
+                                                            <h3 class="mb-0">
+                                                                <%= user.name %>
+                                                                    </a>
+                                                            </h3>
+                                                        </div>
+                                                    </div>
+                                                    <div class="settings-menu">
+                                                        <ul>
+                                                            <li class="nav-item">
+                                                                <a href="freelancer-dashboard.html"
+                                                                    class="nav-link active">
+                                                                    <i class="material-icons">verified_user</i> Yönetim
+                                                                    Paneli
+                                                                </a>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <a href="/freelancers" class="nav-link">
+                                                                    <i class="material-icons">business_center</i>
+                                                                    Freelancer Bul
+                                                                </a>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <a href="/message" class="nav-link">
+                                                                    <i class="material-icons">chat</i> Mesajlaşma
+                                                                </a>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <a href="freelancer-withdraw-money.html"
+                                                                    class="nav-link">
+                                                                    <i class="material-icons">wifi_tethering</i>
+                                                                    Gelir-Gider Sitesi
+                                                                </a>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <a href="/users/logout" class="nav-link">
+                                                                    <i class="material-icons">power_settings_new</i>
+                                                                    Çıkış Yap
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                        <!--Proje Ekle-->
+                                                        <div class="pro-head"><a href="/addProje"
+                                                                class="btn fund-btn skill-add">
+                                                                Yeni Proje Ekle
+                                                            </a>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="col-xl-10 col-md-8">
+                                                <div class="dashboard-sec">
+
+
+                                                    <div class="row">
+                                                        <div class="col-xl-8 d-flex">
+                                                            <div class="card flex-fill">
+                                                                <div class="pro-head">
+                                                                    <h5 class="card-title mb-0">Yönetici Profil
+                                                                        Detayları</h5>
+                                                                </div>
+                                                                <div class="pro-body">
+                                                                    <div id="chartprofile"></div>
+                                                                    <p>Ad-Soyad: <%= user.name %>
+                                                                    </p>
+                                                                    <p>Email Adresi: <%= user.email %>
+                                                                    </p>
+
+                                                                    <hr>
+
+                                                                    <h5>Kategori Yönetimi:</h5>
+                                                                    <div class="pro-head"><a href="/addCategory"
+                                                                            class="btn fund-btn skill-add">
+                                                                            Kategori Ekle
+                                                                        </a>
+                                                                    </div>
+                                                                    <table class="table">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th scope="col">ID</th>
+                                                                                <th scope="col">Kategori Adı</th>
+                                                                                <th scope="col"></th>
+                                                                                <th scope="col"></th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <% for( let i=0; i< categories.length; i++){
+                                                                                %>
+                                                                                <tr>
+                                                                                    <th scope="row">
+                                                                                        <%=categories[i]._id %>
+                                                                                    </th>
+                                                                                    <td>
+                                                                                        <%=categories[i].name %>
+                                                                                    </td>
+                                                                                    <td> <a href="/categories/<%= categories[i]._id %>?_method=DELETE"
+                                                                                            onclick="return confirm('Projeyi kaldırmak istediğinizden emin misiniz')"
+                                                                                            class="projects-btn">Kategoriyi
+                                                                                            Kaldır</a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <% } %>
+                                                                        </tbody>
+                                                                    </table>
+
+
+                                                                    <hr>
+                                                                    <hr>
+                                                                    <h5>Üye Yönetimi:</h5>
+                                                                    <table class="table">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th scope="col">ID</th>
+                                                                                <th scope="col">İsim</th>
+                                                                                <th scope="col">E-mail</th>
+                                                                                <th scope="col">Rolü</th>
+                                                                                <th scope="col">Sil</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <% for( let i=0; i< users.length; i++){ %>
+                                                                                <tr>
+                                                                                    <th scope="row">
+                                                                                        <%=users[i]._id %>
+                                                                                    </th>
+                                                                                    <td>
+                                                                                        <%=users[i].name %>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <%=users[i].email %>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <%=users[i].role %>
+                                                                                    </td>
+                                                                                    <td> <a href="/users/<%= users[i]._id %>?_method=DELETE"
+                                                                                            onclick="return confirm('Projeyi kaldırmak istediğinizden emin misiniz')"
+                                                                                            class="projects-btn">Kullanıcıyı
+                                                                                            Kaldır</a>
+                                                                                    </td>
+
+                                                                                </tr>
+                                                                                <% } %>
+                                                                        </tbody>
+                                                                    </table>
+
+
+                                                                    <hr>
+
+
+
+                                                                    <hr>
+                                                                    <!--Proje Ekle-->
+                                                                    <div class="pro-head"><a href="/addProje"
+                                                                            class="btn fund-btn skill-add">
+                                                                            Yeni Proje Ekle
+                                                                        </a>
+                                                                    </div>
+                                                                    <center>
+                                                                        <h3 class="card-title mb-0">Yayınladığım
+                                                                            Projeler</h3> <br>
+                                                                    </center>
+
+
+                                                                    <% if (flashMessages) { %>
+                                                                        <% if (flashMessages.success) { %>
+                                                                            <div class="alert alert-success">
+                                                                                <%= flashMessages.success %>
+                                                                            </div>
+                                                                            <% } else if (flashMessages.error) { %>
+                                                                                <div class="alert alert-danger">
+                                                                                    <%= flashMessages.error %>
+                                                                                </div>
+                                                                                <% } %>
+                                                                                    <% } %>
+
+
+                                                                                        <% for (let i=0; i< jobs.length;
+                                                                                            i++) { %>
+                                                                                            <div
+                                                                                                class="freelancer-proposals">
+                                                                                                <div
+                                                                                                    class="project-proposals align-items-center freelancer">
+                                                                                                    <div
+                                                                                                        class="proposals-info">
+                                                                                                        <div
+                                                                                                            class="proposals-detail">
+                                                                                                            <h2
+                                                                                                                class="proposals-title">
+                                                                                                                <%= jobs[i].name
+                                                                                                                    %>
+                                                                                                            </h2>
+                                                                                                            <div
+                                                                                                                class="proposals-content">
+                                                                                                                <div
+                                                                                                                    class="proposal-img">
+                                                                                                                    <div
+                                                                                                                        class="text-md-center">
+                                                                                                                        <h4>
+                                                                                                                            <%= jobs[i].isveren
+                                                                                                                                %>
+                                                                                                                        </h4>
+                                                                                                                        <span
+                                                                                                                            class="info-btn">İş
+                                                                                                                            Veren</span>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                                <div
+                                                                                                                    class="proposal-client">
+                                                                                                                    <h4
+                                                                                                                        class="title-info">
+                                                                                                                        Fiyat
+                                                                                                                        Teklifi
+                                                                                                                    </h4>
+                                                                                                                    <h2
+                                                                                                                        class="client-price">
+                                                                                                                        <%= jobs[i].fiyat
+                                                                                                                            %>
+                                                                                                                            Tl
+                                                                                                                    </h2>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="project-hire-info">
+                                                                                                            <div
+                                                                                                                class="content-divider-1">
+                                                                                                            </div>
+                                                                                                            <div
+                                                                                                                class="projects-amount">
+                                                                                                                <h4>Proje
+                                                                                                                    Sahibi:
+                                                                                                                    <%= jobs[i].isveren
+                                                                                                                        %>
+                                                                                                                </h4>
+                                                                                                            </div>
+                                                                                                            <div
+                                                                                                                class="content-divider-1">
+                                                                                                            </div>
+                                                                                                            <div
+                                                                                                                class="projects-action text-center">
+                                                                                                                <a class="projects-btn"
+                                                                                                                    href="/updateProje/#<%= jobs[i]._id %>">
+                                                                                                                    İlanı
+                                                                                                                    Güncelle
+                                                                                                                </a>
+                                                                                                                <a href="/jobs/<%= jobs[i].slug %>?_method=DELETE"
+                                                                                                                    onclick="return confirm('Projeyi kaldırmak istediğinizden emin misiniz')"
+                                                                                                                    class="projects-btn">İlanı
+                                                                                                                    Kaldır</a>
+
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                        class="description-proposal">
+                                                                                                        <h5
+                                                                                                            class="desc-title">
+                                                                                                            Açıklama
+                                                                                                        </h5>
+                                                                                                        <p>
+                                                                                                            <%= jobs[i].description.substring(0,100)
+                                                                                                                + "..."
+                                                                                                                %>
+                                                                                                        </p>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                            <% } %>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <% } %>
+
+                                    <!--Site YÖNETİM PANELİ FİNİSH-->
+                                    <% } %>
+
+                                        <link rel="stylesheet"
+                                            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+                                        <script
+                                            src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                                        <script
+                                            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+                                        <%- include('partials/_footer') %>

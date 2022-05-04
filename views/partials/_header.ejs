@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <title>ProJob</title>
+
+    <link rel="shortcut icon" href="/assets/img/logo.jpg" type="image/x-icon">
+
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="/assets/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/assets/plugins/fontawesome/css/all.min.css">
+
+    <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/assets/css/owl.theme.default.min.css">
+
+    <link rel="stylesheet" href="/assets/plugins/aos/aos.css">
+
+    <link rel="stylesheet" href="/assets/plugins/select2/css/select2.min.css">
+
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+
+</head>
+
+<body class="home-page">
+
+    <div class="main-wrapper">
+
+
+        <header class="header">
+            <nav class="navbar navbar-expand-lg header-nav">
+                <div class="navbar-header">
+                    <a id="mobile_btn" href="javascript:void(0);">
+                        <span class="bar-icon">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                    </a>
+                    <a href="#" class="navbar-brand logo">
+                        <img src="/assets/img/logo.jpg" class="img-fluid" alt="Logo">
+                    </a>
+                </div>
+                <div class="main-menu-wrapper">
+                    <div class="menu-header">
+                        <a href="/" class="menu-logo">
+                            <img src="/assets/img/logo.jpg" class="img-fluid" alt="Logo">
+                        </a>
+                        <a id="menu_close" class="menu-close" href="javascript:void(0);">
+                            <i class="fas fa-times"></i>
+                        </a>
+                    </div>
+                    <ul class="main-nav">              
+                        <% if(userIN) { %>
+
+                            <% for(let i=0; i< categories.length; i++){ %>
+                            <li class="has-submenu">
+                                <a href="/freelancers?categories=<%= categories[i].slug %>"> <%= categories[i].name %></a>
+                                <ul class="submenu">
+                               <!-- <li><a href=""> </a></li> -->
+                                </ul>
+                                </li>
+                                <% } %>
+                            
+                            <% } %>                        
+                    </ul>
+
+                    <% if(!userIN) { %>
+                        <ul class="main-nav d-lg-none">
+                            <li><a href="/register" class="reg-btn"><i class="fas fa-user"></i> Kaydol</a></li>
+                            <li><a href="/login" class="log-btn"><i class="fas fa-lock"></i> Giriş Yap</a></li>
+                        </ul>
+                        
+                        <% } %>
+
+               
+
+                    <% if(userIN) { %>
+
+                    <ul class="main nav d-lg-none ">
+                        <form action="/freelancers" method="GET">
+                         <div class="input-group ">
+                             <input name="search" type="search" class="form-control rounded" placeholder="Arama yap..." aria-label="Search" aria-describedby="search-addon" />
+                             <button type="submit" class="btn btn-outline-primary">Ara</button>
+                           </div>
+                        </form>
+                     </ul>
+                     <% } %>
+
+                     <ul class="main-nav d-lg-none">              
+                        <% if(userIN) { %>
+                            <li class="<%= page_name==='about' && 'actieve' %>">
+                                <a href="/users/dashboard"><%= user.name %>'in Paneli</a>
+                            </li>
+                            
+                            <% } %>                        
+                    </ul>
+
+                </div>
+
+
+                <% if(!userIN) { %>
+                <ul class="nav header-navbar-rht">
+                    <li><a href="/register" class="reg-btn"><i class="fas fa-user"></i> Kaydol</a></li>
+                    <li><a href="/login" class="log-btn"><i class="fas fa-lock"></i> Giriş Yap</a></li>
+                </ul>
+                
+                <% } %>
+
+                <% if(userIN) { %>    
+                    
+                <ul class="nav header-navbar-rht">
+                   <form action="/freelancers" method="GET">
+                    <div class="input-group ">
+                        <input name="search" type="search" class="form-control rounded" placeholder="Arama yap..." aria-label="Search" aria-describedby="search-addon" />
+                        <button type="submit" class="btn btn-outline-primary">Ara</button>
+                      </div>
+                   </form>
+                </ul>
+
+                <ul class="nav header-navbar-rht">              
+                    <% if(userIN) { %>
+                        <li class="<%= page_name==='about' && 'actieve' %>">
+                            <a href="/users/dashboard"><%= user.name %>'in Paneli</a>
+                        </li>
+                        
+                        <% } %>                        
+                </ul>
+   
+                         
+                    <ul class="nav header-navbar-rht">
+                        <li><a href="/users/logout" class="log-btn"><i class="fas fa-lock"></i> Çıkış Yap</a></li>
+                    </ul>
+                    
+                    <% } %>
+            </nav>
+        </header>
+
+
