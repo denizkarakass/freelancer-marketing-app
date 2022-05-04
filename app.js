@@ -25,7 +25,7 @@ const app = express();
 
 //Connect DB
 mongoose
-  .connect('mongodb://localhost/freelance-db', {
+  .connect('mongodb+srv://denizkarakasss:727302dk@cluster0.upkfd.mongodb.net/freelance-app-db?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -47,7 +47,7 @@ app.use(session({
   secret: 'my_keyboard_cat',
   resave: false,
   saveUninitialized: true,
-  store: MongoStore.create({ mongoUrl:'mongodb://localhost/freelance-db' })
+  store: MongoStore.create({ mongoUrl:'mongodb+srv://denizkarakasss:727302dk@cluster0.upkfd.mongodb.net/freelance-app-db?retryWrites=true&w=majority'})
 }));
 
 app.use(flash());
